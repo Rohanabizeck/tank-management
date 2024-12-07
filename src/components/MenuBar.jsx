@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../App.css';
 
 const MenuBar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -43,19 +44,19 @@ const MenuBar = () => {
   ];
 
   return (
-    <nav style={styles.nav}>
+    <nav className="menu-bar">
       {menuItems.map((menu, index) => (
-        <div key={index} style={styles.menuItem}>
+        <div key={index} className="menu-item">
           <button 
-            style={styles.menuButton}
+            className="menu-button"
             onClick={() => setActiveMenu(activeMenu === menu.label ? null : menu.label)}
           >
             {menu.label}
           </button>
           {activeMenu === menu.label && menu.items.length > 0 && (
-            <div style={styles.dropdown}>
+            <div className="dropdown">
               {menu.items.map((item, itemIndex) => (
-                <button key={itemIndex} style={styles.dropdownItem}>
+                <button key={itemIndex} className="dropdown-item">
                   {item}
                 </button>
               ))}
@@ -65,43 +66,6 @@ const MenuBar = () => {
       ))}
     </nav>
   );
-};
-
-const styles = {
-  nav: {
-    display: 'flex',
-    backgroundColor: '#f0f0f0',
-    padding: '10px',
-  },
-  menuItem: {
-    position: 'relative',
-    marginRight: '10px',
-  },
-  menuButton: {
-    backgroundColor: 'transparent',
-    border: 'none',
-    cursor: 'pointer',
-    padding: '5px 10px',
-  },
-  dropdown: {
-    position: 'absolute',
-    top: '100%',
-    left: '0',
-    backgroundColor: 'white',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    padding: '5px 0',
-    zIndex: 1,
-  },
-  dropdownItem: {
-    display: 'block',
-    width: '100%',
-    padding: '5px 10px',
-    textAlign: 'left',
-    border: 'none',
-    backgroundColor: 'transparent',
-    cursor: 'pointer',
-  },
 };
 
 export default MenuBar;
