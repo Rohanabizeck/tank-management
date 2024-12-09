@@ -1,0 +1,40 @@
+.header {
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+  
+  .menu {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu > li {
+    position: relative;
+    margin-right: 20px;
+  }
+  
+  .menu > li > span {
+    cursor: pointer;
+  }
+  
+  .submenu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+  }
+  
+  .menu > li:hover .submenu {
+    display: block;
+  }
+  
+  .submenu li {
+    list-style-type: none;
+    margin-bottom: 5px;
+  }
+  
+  
