@@ -1,20 +1,5 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
-import * as RadioGroup from '@radix-ui/react-radio-group';
-import * as Label from '@radix-ui/react-label';
-import { Slot } from '@radix-ui/react-slot';
-
-const Button = React.forwardRef(({ className, ...props }, ref) => {
-  return (
-    <Slot
-      className={`px-4 py-2 rounded-md transition duration-200 ${className}`}
-      ref={ref}
-      {...props}
-    />
-  );
-});
-
-Button.displayName = 'Button';
 
 const Communication = () => {
   const [selectedOption, setSelectedOption] = useState('STARSV1');
@@ -23,6 +8,13 @@ const Communication = () => {
     e.preventDefault();
     console.log('Selected option:', selectedOption);
   };
+
+  const handleCancel = () => {
+    console.log('Cancel clicked');
+    // Add any cancel logic here
+  };
+
+  const options = ['STARSV 1', 'TADIRAN 1', 'STARSV 2', 'TADIRAN 2', 'HCRR', 'OFC', 'SDR'];
 
   return (
     <div className="p-6">
@@ -33,34 +25,39 @@ const Communication = () => {
         </button>
         
         <form onSubmit={handleSubmit} className="space-y-8">
-          <RadioGroup.Root
-            defaultValue={selectedOption}
-            onValueChange={setSelectedOption}
-            className="space-y-4"
-          >
-            {['STARSV 1', 'TADIRAN 1', 'STARSV 2', 'TADIRAN 2', 'HCRR', 'OFC', 'SDR'].map((option) => (
+          <div className="space-y-4">
+            {options.map((option) => (
               <div key={option} className="flex items-center space-x-2">
-                <RadioGroup.Item
-                  value={option.replace(' ', '')}
+                <input
+                  type="radio"
                   id={option.replace(' ', '')}
-                  className="w-4 h-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-2 after:h-2 after:rounded-full after:bg-blue-500" />
-                </RadioGroup.Item>
-                <Label.Root htmlFor={option.replace(' ', '')} className="text-sm font-medium text-gray-700">
+                  name="communication"
+                  value={option.replace(' ', '')}
+                  checked={selectedOption === option.replace(' ', '')}
+                  onChange={(e) => setSelectedOption(e.target.value)}
+                  className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                />
+                <label htmlFor={option.replace(' ', '')} className="text-sm font-medium text-gray-700">
                   {option}
-                </Label.Root>
+                </label>
               </div>
             ))}
-          </RadioGroup.Root>
+          </div>
 
-          <div className="flex justify-center gap-4 mt-6">
-            <Button type="submit" className="bg-blue-500 text-white hover:bg-blue-600">
+          <div className="flex justify-end space-x-4 mt-6">
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
               Ok
-            </Button>
-            <Button type="button" className="bg-gray-500 text-white hover:bg-gray-600">
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+            >
               Cancel
-            </Button>
+            </button>
           </div>
         </form>
       </div>
