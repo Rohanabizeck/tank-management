@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
 import OsmMap from './pages/osm-map';
 import Communication from './components/Communication';
+import PortSettings from './components/PortSettings';
+import CnrSettings from './components/CnrSettings';
 import './index.css';
 
 // TopToolbar Component
@@ -82,6 +84,8 @@ const MainContent = () => (
     <Switch>
       <Route path="/open-osm-map" component={OsmMap} />
       <Route path="/communication" component={Communication} />
+      <Route path="/port-settings" component={PortSettings} />
+      <Route path="/cnr-settings" component={CnrSettings} />
       <Route path="/">
         <div className="content-grid">
           <div className="input-box">
